@@ -1,0 +1,20 @@
+{
+    "projectName": "appsyncApollo",
+    "projectPath": "/Users/jamesbest/code/lab/appsyncApollo",
+    "defaultEditor": "code",
+    "frontendHandler": {
+        "javascript": "/Users/jamesbest/.nvm/versions/node/v10.13.0/lib/node_modules/@aws-amplify/cli/node_modules/amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "react-native",
+        "config": {
+            "SourceDir": "/",
+            "DistributionDir": "/",
+            "BuildCommand": "npm run-script build",
+            "StartCommand": "npm run-script start"
+        }
+    },
+    "providers": {
+        "awscloudformation": "/Users/jamesbest/.nvm/versions/node/v10.13.0/lib/node_modules/@aws-amplify/cli/node_modules/amplify-provider-awscloudformation"
+    }
+}
