@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import { LIST_TODOS_QUERY } from './listTodos';
-
+import { LIST_TODOS_QUERY } from './listTodos'
 // Mutation
 const CREATE_TODO_MUTATION = gql`
   mutation CREATE_TODO_MUTATION($name: String!, $description: String!) {
@@ -16,20 +15,17 @@ const CREATE_TODO_MUTATION = gql`
   }
 `;
 
-/**
- * state = {
+
+class CreateTodo extends React.Component {
+  state = {
     name: '',
     description: ''
   }
- */
-const CreateTodo = () => {
-    const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
+
+  render() {
+    console.log(this.state)
     return (
-      <Mutation
-        mutation={CREATE_TODO_MUTATION}
-        variables={{ name, description }}
-        refetchQueries={[{ query: LIST_TODOS_QUERY }]}>
+      <Mutation mutation={CREATE_TODO_MUTATION} variables={{ ...this.state }} refetchQueries={[{query: LIST_TODOS_QUERY}]}>
         {(createTodo, { data }) => {
           console.log("MUTATION DATA: ", data);
           return (
@@ -42,8 +38,8 @@ const CreateTodo = () => {
                     borderColor: "gray",
                     borderWidth: 1
                   }}
-                  onChangeText={text => setName(text)}
-                  value={name}
+                  onChangeText={text => this.setState({ name: text })}
+                  value={this.state.name}
                 />
               </View>
               <View style={{ paddingBottom: 20 }}>
@@ -55,22 +51,20 @@ const CreateTodo = () => {
                     borderColor: "gray",
                     borderWidth: 1
                   }}
-                  onChangeText={text =>
-                    setDescription(text)
-                  }
-                  value={description}
+                  onChangeText={text => this.setState({ description: text })}
+                  value={this.state.description}
                 />
               </View>
               <Button onPress={() => {
                 createTodo()
-                setName('')
-                setDescription('')
-                }} title='Create Todo' />
+                this.setState({ name: "", description: "" })
+              }} title='Create Todo' />
             </View>
           );
         }}
       </Mutation>
-    );
+    )
   }
+}
 
 export default CreateTodo;
